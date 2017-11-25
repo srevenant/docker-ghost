@@ -13,11 +13,25 @@ services:
       - TZ=US/Mountain
     volumes:
       - /data/ghost/surfing1/content:/app/ghost/content
+      - /data/ghost/surfing1/config:/app/ghost/config
+    #entrypoint: sleep 900000
     ports:
       - target: 2368
         published: 2001
         protocol: tcp
         mode: host
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 1s
+#        max_failure_ratio: 0
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+#        max_attempts: 3
+#        window: 120s
+
   db:
     image: mariadb
     environment:

@@ -16,8 +16,8 @@ RUN npm install -g ghost-cli &&\
         --db sqlite3 \
         --no-prompt --no-stack --no-setup \
         --dir "$GHOST_BASE" &&\
-    ln -s $GHOST_BASE/config/config.production.json $GHOST_BASE/current/config.production.json &&\
     rm -rf $GHOST_BASE/current/content/images &&\
+    ln -s $GHOST_BASE/content/config.production.json $GHOST_BASE/current/config.production.json &&\
     ln -s $GHOST_BASE/content/images $GHOST_BASE/current/content/images
 
 WORKDIR $GHOST_BASE/current

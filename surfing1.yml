@@ -1,0 +1,26 @@
+version: "3.2"
+services:
+  ghost:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+    build:
+      context: .
+      dockerfile: Dockerfile.1
+    image: revenant/ghost1
+    environment:
+      - TZ=US/Mountain
+    volumes:
+      - /data/ghost/surfing1/content:/app/ghost/content
+    ports:
+      - target: 2368
+        published: 2001
+        protocol: tcp
+        mode: host
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - /data/ghost/surfing1/db:/var/lib/mysql

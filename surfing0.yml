@@ -1,0 +1,24 @@
+version: "3.2"
+services:
+  ghost:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+    build: .
+    image: revenant/ghost
+    environment:
+      - TZ=US/Mountain
+    volumes:
+      - /data/ghost/surfing/content:/app/ghost/content
+    ports:
+      - target: 2368
+        published: 2000
+        protocol: tcp
+        mode: host
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    volumes:
+      - /data/ghost/surfing/db:/var/lib/mysql

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+image=revenant/ghost
+
+cd /home/bjg/git/docker-ghost
+
+SVCS=surfing
+
+docker build -t $image --build-arg BUILD_NUMBER=$(date +%Y.%m.%d) . || exit 1
+
+for svc in $SVCS; do
+    docker service update --image=$image --force ${svc}_ghost
+done
+
+docker system prune -f
+docker volume prune -f

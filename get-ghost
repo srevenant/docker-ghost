@@ -1,0 +1,12 @@
+#!/bin/bash
+
+VER=0.11.12
+if [ $1 ]; then
+    VER=$1
+fi
+
+curl -sLOk https://github.com/TryGhost/Ghost/releases/download/$VER/Ghost-$VER.zip
+
+unzip -q -t Ghost-$VER.zip || exit
+
+echo Ghost-$VER.zip

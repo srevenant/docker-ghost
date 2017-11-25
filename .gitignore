@@ -1,0 +1,3 @@
+Ghost*.zip
+# its a symlink
+docker-compose.yml
